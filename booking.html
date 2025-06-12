@@ -60,6 +60,24 @@
       border: 1px solid #ccc;
       border-radius: 10px;
       margin-bottom: 15px;
+      position: relative;
+    }
+
+    .small-delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 4px 8px;
+      font-size: 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .small-delete-btn:hover {
+      background-color: darkred;
     }
   </style>
 </head>
@@ -104,7 +122,7 @@
     // Load existing tickets from localStorage on page load
     document.addEventListener('DOMContentLoaded', () => {
       const tickets = JSON.parse(localStorage.getItem('allTickets')) || [];
-      tickets.forEach(displayTicket);
+      tickets.forEach((ticket, index) => displayTicket(ticket, index));
     });
 
     function bookTicket(event) {
@@ -123,17 +141,20 @@
       localStorage.setItem('allTickets', JSON.stringify(tickets));
 
       // Display on page
-      displayTicket(ticket);
+      displayTicket(ticket, tickets.length - 1);
 
       // Reset the form
       document.querySelector('form').reset();
     }
 
-    function displayTicket(ticket) {
+    function displayTicket(ticket, index) {
       const container = document.getElementById('summaryList');
       const div = document.createElement('div');
       div.className = 'ticket-box';
+      div.setAttribute('data-index', index);
+
       div.innerHTML = `
+        <button class="small-delete-btn" onclick="deleteTicket(${index}, this)">Delete</button>
         <p><strong>Visitor Name:</strong> ${ticket.visitor}</p>
         <p><strong>Animal Name:</strong> ${ticket.animal}</p>
         <p><strong>Visitor Type:</strong> ${ticket.visitorType}</p>
@@ -141,6 +162,16 @@
       `;
       container.appendChild(div);
       document.getElementById('ticketSummary').style.display = 'block';
+    }
+
+    function deleteTicket(index, btn) {
+      let tickets = JSON.parse(localStorage.getItem('allTickets')) || [];
+      tickets.splice(index, 1);
+      localStorage.setItem('allTickets', JSON.stringify(tickets));
+
+      // Clear and re-render all tickets
+      document.getElementById('summaryList').innerHTML = '';
+      tickets.forEach((ticket, idx) => displayTicket(ticket, idx));
     }
   </script>
 </body>
