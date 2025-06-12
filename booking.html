@@ -60,26 +60,16 @@
       border: 1px solid #ccc;
       border-radius: 10px;
       margin-bottom: 15px;
-      position: relative;
     }
 
     .delete-btn {
-  position: absolute;
-  top: 5px;
-  right: 5px;
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 2px 6px;
-  border-radius: 3px;
-  font-size: 9px;
-  cursor: pointer;
-  width: auto;
-  min-width: unset;
-  height: auto;
-  line-height: 1;
-}
-
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 14px;
+      cursor: pointer;
     }
 
     .delete-btn:hover {
@@ -155,11 +145,11 @@
       div.setAttribute('data-index', index);
 
       div.innerHTML = `
-        <button class="delete-btn" onclick="deleteTicket(${index}, this)">Delete</button>
         <p><strong>Visitor Name:</strong> ${ticket.visitor}</p>
         <p><strong>Animal Name:</strong> ${ticket.animal}</p>
         <p><strong>Visitor Type:</strong> ${ticket.visitorType}</p>
         <p><strong>Amount Paid:</strong> ₹${ticket.amount}</p>
+        <button class="delete-btn" onclick="deleteTicket(${index}, this)">Delete</button>
       `;
       container.appendChild(div);
       document.getElementById('ticketSummary').style.display = 'block';
