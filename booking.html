@@ -70,10 +70,11 @@
       background-color: red;
       color: white;
       border: none;
-      padding: 4px 8px;
-      font-size: 12px;
-      border-radius: 4px;
+      padding: 3px 6px;
+      font-size: 10px;
+      border-radius: 3px;
       cursor: pointer;
+      min-width: 40px;
     }
 
     .small-delete-btn:hover {
@@ -119,7 +120,6 @@
 
   <!-- Booking Logic -->
   <script>
-    // Load existing tickets from localStorage on page load
     document.addEventListener('DOMContentLoaded', () => {
       const tickets = JSON.parse(localStorage.getItem('allTickets')) || [];
       tickets.forEach((ticket, index) => displayTicket(ticket, index));
@@ -135,15 +135,11 @@
 
       const ticket = { visitor, animal, visitorType, amount };
 
-      // Save to localStorage
       let tickets = JSON.parse(localStorage.getItem('allTickets')) || [];
       tickets.push(ticket);
       localStorage.setItem('allTickets', JSON.stringify(tickets));
 
-      // Display on page
       displayTicket(ticket, tickets.length - 1);
-
-      // Reset the form
       document.querySelector('form').reset();
     }
 
@@ -169,7 +165,6 @@
       tickets.splice(index, 1);
       localStorage.setItem('allTickets', JSON.stringify(tickets));
 
-      // Clear and re-render all tickets
       document.getElementById('summaryList').innerHTML = '';
       tickets.forEach((ticket, idx) => displayTicket(ticket, idx));
     }
