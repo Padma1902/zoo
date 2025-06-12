@@ -7,7 +7,7 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color:  lightblue;
+      background-color: lightblue;
       padding: 20px;
     }
     nav {
@@ -40,6 +40,7 @@
       border: none;
       width: 100%;
       border-radius: 5px;
+      cursor: pointer;
     }
     ul {
       margin-top: 30px;
@@ -51,12 +52,22 @@
       margin-bottom: 10px;
       padding: 10px;
       border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .delete-btn {
+      background-color: crimson;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
 
-  <!-- ✅ Navigation Bar -->
   <nav>
     <a href="index.html">Login</a>
     <a href="animal-records.html">Animal Records</a>
@@ -105,13 +116,28 @@
       displayAnimals();
     }
 
+    function deleteAnimal(index) {
+      animals.splice(index, 1);
+      displayAnimals();
+    }
+
     function displayAnimals() {
       const list = document.getElementById("animalList");
       list.innerHTML = "";
 
       animals.forEach((animal, index) => {
         const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}`;
+
+        const info = document.createElement("span");
+        info.textContent = `${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}`;
+
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "delete-btn";
+        delBtn.onclick = () => deleteAnimal(index);
+
+        li.appendChild(info);
+        li.appendChild(delBtn);
         list.appendChild(li);
       });
     }
