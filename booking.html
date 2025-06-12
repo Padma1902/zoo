@@ -3,19 +3,70 @@
 <head>
   <title>Book Ticket</title>
   <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      background-color: lightblue;
+      font-family: Arial, sans-serif;
+    }
+
+    nav {
+      background-color: #e6e6fa;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+    }
+
+    form input, form select {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+
+    button {
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    form, #ticketSummary {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 450px;
+    }
+  </style>
 </head>
-<body style="background-color: lightblue; font-family: Arial, sans-serif;">
+<body>
   <!-- Navigation Bar -->
-  <nav style="background-color: #e6e6fa; padding: 10px; border-radius: 10px; margin-bottom: 20px;">
-    <a href="index.html" style="margin-right: 15px;">Login</a>
-    <a href="animal-records.html" style="margin-right: 15px;">Animal Records</a>
+  <nav>
+    <a href="index.html">Login</a>
+    <a href="animal-records.html">Animal Records</a>
     <a href="booking.html">Ticket Booking</a>
   </nav>
 
   <h2>Book a Ticket</h2>
-  
+
   <!-- Booking Form -->
-  <form onsubmit="bookTicket(event)" style="background: white; padding: 20px; border-radius: 10px; max-width: 400px;">
+  <form onsubmit="bookTicket(event)">
     <input id="visitorName" placeholder="Your Name" required><br><br>
     <input id="animalName" placeholder="Animal Name" required><br><br>
 
@@ -33,7 +84,7 @@
   </form>
 
   <!-- Ticket Display Section -->
-  <div id="ticketSummary" style="margin-top: 30px; background: #fff; padding: 20px; border-radius: 10px; max-width: 400px; display: none;">
+  <div id="ticketSummary" style="margin-top: 30px; display: none;">
     <h3>🎟️ Ticket Summary</h3>
     <p><strong>Visitor Name:</strong> <span id="summaryName"></span></p>
     <p><strong>Animal Name:</strong> <span id="summaryAnimal"></span></p>
@@ -51,7 +102,6 @@
       const visitorType = document.getElementById('visitorType').value;
       const amount = document.getElementById('amount').value;
 
-      // Show ticket summary on the same page
       document.getElementById('summaryName').textContent = visitor;
       document.getElementById('summaryAnimal').textContent = animal;
       document.getElementById('summaryType').textContent = visitorType;
@@ -59,11 +109,9 @@
 
       document.getElementById('ticketSummary').style.display = 'block';
 
-      // Optionally save to localStorage if needed later
       const ticket = { visitor, animal, visitorType, amount };
       localStorage.setItem('lastTicket', JSON.stringify(ticket));
 
-      // Clear form
       document.querySelector('form').reset();
     }
   </script>
