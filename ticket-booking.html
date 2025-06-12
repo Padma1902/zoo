@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Book Ticket</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: lavender;
+      padding: 20px;
+    }
+    nav {
+      background-color: #e6e6fa;
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    nav a {
+      margin-right: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+    }
+    form {
+      background: white;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 400px;
+    }
+    input {
+      width: 100%;
+      margin-bottom: 10px;
+      padding: 8px;
+    }
+    button {
+      padding: 10px;
+      background-color: #7b68ee;
+      color: white;
+      border: none;
+      width: 100%;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="index.html">Login</a>
+    <a href="animal-records.html">Animal Records</a>
+    <a href="booking.html">Ticket Booking</a>
+  </nav>
+
+  <h2>Book a Ticket</h2>
+  <form onsubmit="bookTicket(event)">
+    <input id="visitorName" placeholder="Your Name" required>
+    <input id="animalName" placeholder="Animal Name" required>
+    <button type="submit">Book Ticket</button>
+  </form>
+
+  <script>
+    function bookTicket(event) {
+      event.preventDefault();
+      const visitor = document.getElementById('visitorName').value;
+      const animal = document.getElementById('animalName').value;
+      alert(`🎟️ Ticket booked for ${visitor} to visit ${animal}!`);
+      document.querySelector('form').reset();
+    }
+  </script>
+</body>
+</html>
