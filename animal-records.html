@@ -85,6 +85,24 @@
       padding: 12px;
       border-radius: 6px;
       font-size: 15px;
+      position: relative;
+    }
+
+    .delete-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+    .delete-btn:hover {
+      background-color: darkred;
     }
   </style>
 </head>
@@ -152,13 +170,21 @@
       displayAnimals();
     }
 
+    function deleteAnimal(index) {
+      animals.splice(index, 1);
+      displayAnimals();
+    }
+
     function displayAnimals() {
       const list = document.getElementById("animalList");
       list.innerHTML = "";
 
       animals.forEach((animal, index) => {
         const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}`;
+        li.innerHTML = `
+          ${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}
+          <button class="delete-btn" onclick="deleteAnimal(${index})">Delete</button>
+        `;
         list.appendChild(li);
       });
     }
