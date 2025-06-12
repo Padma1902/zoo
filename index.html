@@ -24,11 +24,32 @@
       color: black;
     }
 
+    .heading {
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .heading h1 {
+      font-size: 36px;
+      margin: 0;
+      color: black;
+      letter-spacing: 2px;
+    }
+
+    .heading p {
+      font-size: 14px;
+      margin-top: 5px;
+      color: black;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+
     form {
       background-color: white;
       padding: 20px;
       border-radius: 10px;
       max-width: 300px;
+      margin: auto;
     }
 
     input {
@@ -45,7 +66,7 @@
       color: white;
       border: none;
       padding: 8px 20px;
-      border-radius: 50px; /* Oval shape */
+      border-radius: 50px;
       font-size: 16px;
       cursor: pointer;
     }
@@ -63,6 +84,12 @@
     <a href="animal-records.html">Animal Records</a>
     <a href="booking.html">Ticket Booking</a>
   </nav>
+
+  <!-- Heading and Tagline -->
+  <div class="heading">
+    <h1>ZOO MANAGEMENT SYSTEM</h1>
+    <p>EXPLORE THE WILD IN A CLICK</p>
+  </div>
 
   <h2>Login</h2>
   <form onsubmit="login(event)">
