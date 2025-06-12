@@ -1,14 +1,12 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-  <meta charset="UTF-8">
-  <title>Animal Records</title>
+  <title>Book Ticket</title>
   <link rel="stylesheet" href="style.css">
   <style>
     body {
-      font-family: Arial, sans-serif;
       background-color: lightblue;
-      padding: 20px;
+      font-family: Arial, sans-serif;
     }
 
     nav {
@@ -21,146 +19,106 @@
     nav a {
       margin-right: 15px;
       text-decoration: none;
-      font-weight: bold;
       color: #333;
+      font-weight: bold;
     }
 
-    .form-container {
+    .form-container, #ticketSummary {
       background: white;
-      padding: 25px;
-      border-radius: 12px;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 450px;
+      margin-bottom: 20px;
     }
 
-    form input, form select {
+    .form-container input,
+    .form-container select,
+    .form-container button {
       width: 100%;
       padding: 10px;
-      margin-bottom: 15px;
+      font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 6px;
       box-sizing: border-box;
-      font-size: 16px;
-    }
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
-
-    .gender-options {
       margin-bottom: 15px;
     }
 
-    .gender-options label {
-      font-weight: normal;
-      margin-right: 15px;
-    }
-
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      background-color: #7b68ee;
+    .form-container button {
+      background-color: #4CAF50;
       color: white;
       border: none;
-      border-radius: 6px;
       cursor: pointer;
     }
 
-    button:hover {
-      background-color: #6a5acd;
+    .form-container button:hover {
+      background-color: #45a049;
     }
 
-    ul {
-      margin-top: 30px;
-      padding: 0;
-      list-style-type: none;
-    }
-
-    li {
-      background: white;
-      margin-bottom: 10px;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 15px;
+    #ticketSummary {
+      display: none;
     }
   </style>
 </head>
 <body>
-
-  <!-- ✅ Navigation Bar -->
+  <!-- Navigation Bar -->
   <nav>
     <a href="index.html">Login</a>
     <a href="animal-records.html">Animal Records</a>
     <a href="booking.html">Ticket Booking</a>
   </nav>
 
-  <h2>Add Animal Record</h2>
+  <h2>Book a Ticket</h2>
 
-  <!-- 🧾 Form Container -->
+  <!-- Booking Form Container -->
   <div class="form-container">
-    <form id="animalForm" onsubmit="addAnimal(event)">
-      <label for="name">Animal Name:</label>
-      <input id="name" placeholder="Enter Animal Name" required />
+    <form onsubmit="bookTicket(event)">
+      <input id="visitorName" placeholder="Your Name" required>
+      <input id="animalName" placeholder="Animal Name" required>
 
-      <label for="caretaker">Caretaker Name:</label>
-      <input id="caretaker" placeholder="Enter Caretaker Name" required />
+      <label for="visitorType">Visitor Type:</label>
+      <select id="visitorType" required>
+        <option value="">--Select--</option>
+        <option value="Adult">Adult</option>
+        <option value="Child">Child</option>
+        <option value="Senior">Senior</option>
+      </select>
 
-      <label for="vetCheckups">Vet Checkups:</label>
-      <input id="vetCheckups" placeholder="e.g., Done / Not Done" required />
+      <input id="amount" type="number" placeholder="Amount (₹)" required>
 
-      <label for="feedingSchedule">Feeding Schedule:</label>
-      <input id="feedingSchedule" placeholder="e.g., 9 AM, 6 PM" required />
-
-      <label>Gender:</label>
-      <div class="gender-options">
-        <label><input type="radio" name="gender" value="Male" required> Male</label>
-        <label><input type="radio" name="gender" value="Female" required> Female</label>
-      </div>
-
-      <button type="submit">Add Animal</button>
+      <button type="submit">Book Ticket</button>
     </form>
   </div>
 
-  <h2>Saved Records</h2>
-  <ul id="animalList"></ul>
+  <!-- Ticket Summary -->
+  <div id="ticketSummary" class="form-container">
+    <h3>🎟️ Ticket Summary</h3>
+    <p><strong>Visitor Name:</strong> <span id="summaryName"></span></p>
+    <p><strong>Animal Name:</strong> <span id="summaryAnimal"></span></p>
+    <p><strong>Visitor Type:</strong> <span id="summaryType"></span></p>
+    <p><strong>Amount Paid:</strong> ₹<span id="summaryAmount"></span></p>
+  </div>
 
+  <!-- Booking Logic -->
   <script>
-    const animals = [];
-
-    function addAnimal(event) {
+    function bookTicket(event) {
       event.preventDefault();
 
-      const name = document.getElementById("name").value;
-      const caretaker = document.getElementById("caretaker").value;
-      const vetCheckups = document.getElementById("vetCheckups").value;
-      const feedingSchedule = document.getElementById("feedingSchedule").value;
-      const gender = document.querySelector('input[name="gender"]:checked').value;
+      const visitor = document.getElementById('visitorName').value;
+      const animal = document.getElementById('animalName').value;
+      const visitorType = document.getElementById('visitorType').value;
+      const amount = document.getElementById('amount').value;
 
-      const animal = {
-        name,
-        caretaker,
-        vetCheckups,
-        feedingSchedule,
-        gender
-      };
+      document.getElementById('summaryName').textContent = visitor;
+      document.getElementById('summaryAnimal').textContent = animal;
+      document.getElementById('summaryType').textContent = visitorType;
+      document.getElementById('summaryAmount').textContent = amount;
 
-      animals.push(animal);
-      document.getElementById("animalForm").reset();
-      displayAnimals();
-    }
+      document.getElementById('ticketSummary').style.display = 'block';
 
-    function displayAnimals() {
-      const list = document.getElementById("animalList");
-      list.innerHTML = "";
+      const ticket = { visitor, animal, visitorType, amount };
+      localStorage.setItem('lastTicket', JSON.stringify(ticket));
 
-      animals.forEach((animal, index) => {
-        const li = document.createElement("li");
-        li.textContent = `${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}`;
-        list.appendChild(li);
-      });
+      document.querySelector('form').reset();
     }
   </script>
 </body>
