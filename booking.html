@@ -63,21 +63,23 @@
       position: relative;
     }
 
-    .small-delete-btn {
+    .delete-btn {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 8px;
+      right: 8px;
       background-color: red;
       color: white;
       border: none;
-      padding: 3px 6px;
+      padding: 4px 8px;
+      border-radius: 4px;
       font-size: 10px;
-      border-radius: 3px;
       cursor: pointer;
+      width: auto;
       min-width: 40px;
+      height: auto;
     }
 
-    .small-delete-btn:hover {
+    .delete-btn:hover {
       background-color: darkred;
     }
   </style>
@@ -150,7 +152,7 @@
       div.setAttribute('data-index', index);
 
       div.innerHTML = `
-        <button class="small-delete-btn" onclick="deleteTicket(${index}, this)">Delete</button>
+        <button class="delete-btn" onclick="deleteTicket(${index}, this)">Delete</button>
         <p><strong>Visitor Name:</strong> ${ticket.visitor}</p>
         <p><strong>Animal Name:</strong> ${ticket.animal}</p>
         <p><strong>Visitor Type:</strong> ${ticket.visitorType}</p>
