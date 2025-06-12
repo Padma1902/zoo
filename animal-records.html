@@ -7,50 +7,84 @@
   <style>
     body {
       font-family: Arial, sans-serif;
-      background-color:  lightblue;
+      background-color: lightblue;
       padding: 20px;
     }
+
     nav {
       background-color: #e6e6fa;
       padding: 10px;
       border-radius: 10px;
       margin-bottom: 20px;
     }
+
     nav a {
       margin-right: 15px;
       text-decoration: none;
       font-weight: bold;
       color: #333;
     }
-    form {
+
+    .form-container {
       background: white;
-      padding: 20px;
-      border-radius: 10px;
-      max-width: 400px;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 500px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
-    input, select {
+
+    form input, form select {
       width: 100%;
-      margin-bottom: 10px;
-      padding: 8px;
-    }
-    button {
       padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 16px;
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    .gender-options {
+      margin-bottom: 15px;
+    }
+
+    .gender-options label {
+      font-weight: normal;
+      margin-right: 15px;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px;
+      font-size: 16px;
       background-color: #7b68ee;
       color: white;
       border: none;
-      width: 100%;
-      border-radius: 5px;
+      border-radius: 6px;
+      cursor: pointer;
     }
+
+    button:hover {
+      background-color: #6a5acd;
+    }
+
     ul {
       margin-top: 30px;
       padding: 0;
       list-style-type: none;
     }
+
     li {
       background: white;
       margin-bottom: 10px;
-      padding: 10px;
-      border-radius: 5px;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 15px;
     }
   </style>
 </head>
@@ -64,18 +98,31 @@
   </nav>
 
   <h2>Add Animal Record</h2>
-  <form id="animalForm" onsubmit="addAnimal(event)">
-    <input id="name" placeholder="Animal Name" required />
-    <input id="caretaker" placeholder="Caretaker Name" required />
-    <input id="vetCheckups" placeholder="Vet Checkups (e.g., Done/Not Done)" required />
-    <input id="feedingSchedule" placeholder="Feeding Schedule (e.g., 9 AM, 6 PM)" required />
 
-    <label>Gender:</label>
-    <label><input type="radio" name="gender" value="Male" required> Male</label>
-    <label><input type="radio" name="gender" value="Female" required> Female</label>
+  <!-- 🧾 Form Container -->
+  <div class="form-container">
+    <form id="animalForm" onsubmit="addAnimal(event)">
+      <label for="name">Animal Name:</label>
+      <input id="name" placeholder="Enter Animal Name" required />
 
-    <button type="submit">Add Animal</button>
-  </form>
+      <label for="caretaker">Caretaker Name:</label>
+      <input id="caretaker" placeholder="Enter Caretaker Name" required />
+
+      <label for="vetCheckups">Vet Checkups:</label>
+      <input id="vetCheckups" placeholder="e.g., Done / Not Done" required />
+
+      <label for="feedingSchedule">Feeding Schedule:</label>
+      <input id="feedingSchedule" placeholder="e.g., 9 AM, 6 PM" required />
+
+      <label>Gender:</label>
+      <div class="gender-options">
+        <label><input type="radio" name="gender" value="Male" required> Male</label>
+        <label><input type="radio" name="gender" value="Female" required> Female</label>
+      </div>
+
+      <button type="submit">Add Animal</button>
+    </form>
+  </div>
 
   <h2>Saved Records</h2>
   <ul id="animalList"></ul>
