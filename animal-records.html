@@ -1,206 +1,66 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Animal Records</title>
-  <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: lightblue;
-      padding: 20px;
-    }
+<!-- ... previous code unchanged ... -->
 
-    nav {
-      background-color: #e6e6fa;
-      padding: 10px;
-      border-radius: 10px;
-      margin-bottom: 20px;
-    }
+<h2>Saved Records</h2>
+<ul id="animalList"></ul>
 
-    nav a {
-      margin-right: 15px;
-      text-decoration: none;
-      font-weight: bold;
-      color: #333;
-    }
+<!-- ✅ Added Next Button -->
+<div style="text-align: center; margin-top: 20px;">
+  <button onclick="window.location.href='booking.html'" style="padding: 10px 20px; border-radius: 6px; background-color: #4CAF50; color: white; border: none;">Next ➡️</button>
+</div>
 
-    .form-container {
-      background: white;
-      padding: 25px;
-      border-radius: 12px;
-      max-width: 500px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
+<script>
+  // Load from localStorage
+  let animals = JSON.parse(localStorage.getItem("animals")) || [];
 
-    form input, form select {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border: 1px solid #ccc;
-      border-radius: 6px;
-      box-sizing: border-box;
-      font-size: 16px;
-    }
+  function saveToStorage() {
+    localStorage.setItem("animals", JSON.stringify(animals));
+  }
 
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 5px;
-    }
+  function addAnimal(event) {
+    event.preventDefault();
 
-    .gender-options {
-      margin-bottom: 15px;
-    }
+    const name = document.getElementById("name").value;
+    const caretaker = document.getElementById("caretaker").value;
+    const vetCheckups = document.getElementById("vetCheckups").value;
+    const feedingSchedule = document.getElementById("feedingSchedule").value;
+    const gender = document.querySelector('input[name="gender"]:checked').value;
 
-    .gender-options label {
-      font-weight: normal;
-      margin-right: 15px;
-    }
+    const animal = {
+      name,
+      caretaker,
+      vetCheckups,
+      feedingSchedule,
+      gender
+    };
 
-    button {
-      width: 100%;
-      padding: 12px;
-      font-size: 16px;
-      background-color: #7b68ee;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
+    animals.push(animal);
+    saveToStorage();
+    document.getElementById("animalForm").reset();
+    displayAnimals();
+  }
 
-    button:hover {
-      background-color: #6a5acd;
-    }
+  function deleteAnimal(index) {
+    animals.splice(index, 1);
+    saveToStorage();
+    displayAnimals();
+  }
 
-    ul {
-      margin-top: 30px;
-      padding: 0;
-      list-style-type: none;
-    }
+  function displayAnimals() {
+    const list = document.getElementById("animalList");
+    list.innerHTML = "";
 
-    li {
-      background: white;
-      margin-bottom: 10px;
-      padding: 12px;
-      border-radius: 6px;
-      font-size: 15px;
-      position: relative;
-    }
+    animals.forEach((animal, index) => {
+      const li = document.createElement("li");
+      li.innerHTML = `
+        ${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}
+        <button class="delete-btn" onclick="deleteAnimal(${index})">Delete</button>
+      `;
+      list.appendChild(li);
+    });
+  }
 
-    .delete-btn {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      background-color: red;
-      color: white;
-      border: none;
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 10px;
-      cursor: pointer;
-      width: auto;
-      min-width: 40px;
-      height: auto;
-    }
-
-    .delete-btn:hover {
-      background-color: darkred;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- ✅ Navigation Bar -->
-  <nav>
-    <a href="index.html">Login</a>
-    <a href="animal-records.html">Animal Records</a>
-    <a href="booking.html">Ticket Booking</a>
-  </nav>
-
-  <h2>Add Animal Record</h2>
-
-  <!-- 🧾 Form Container -->
-  <div class="form-container">
-    <form id="animalForm" onsubmit="addAnimal(event)">
-      <label for="name">Animal Name:</label>
-      <input id="name" placeholder="Enter Animal Name" required />
-
-      <label for="caretaker">Caretaker Name:</label>
-      <input id="caretaker" placeholder="Enter Caretaker Name" required />
-
-      <label for="vetCheckups">Vet Checkups:</label>
-      <input id="vetCheckups" placeholder="e.g., Done / Not Done" required />
-
-      <label for="feedingSchedule">Feeding Schedule:</label>
-      <input id="feedingSchedule" placeholder="e.g., 9 AM, 6 PM" required />
-
-      <label>Gender:</label>
-      <div class="gender-options">
-        <label><input type="radio" name="gender" value="Male" required> Male</label>
-        <label><input type="radio" name="gender" value="Female" required> Female</label>
-      </div>
-
-      <button type="submit">Add Animal</button>
-    </form>
-  </div>
-
-  <h2>Saved Records</h2>
-  <ul id="animalList"></ul>
-
-  <script>
-    // Load from localStorage
-    let animals = JSON.parse(localStorage.getItem("animals")) || [];
-
-    function saveToStorage() {
-      localStorage.setItem("animals", JSON.stringify(animals));
-    }
-
-    function addAnimal(event) {
-      event.preventDefault();
-
-      const name = document.getElementById("name").value;
-      const caretaker = document.getElementById("caretaker").value;
-      const vetCheckups = document.getElementById("vetCheckups").value;
-      const feedingSchedule = document.getElementById("feedingSchedule").value;
-      const gender = document.querySelector('input[name="gender"]:checked').value;
-
-      const animal = {
-        name,
-        caretaker,
-        vetCheckups,
-        feedingSchedule,
-        gender
-      };
-
-      animals.push(animal);
-      saveToStorage();
-      document.getElementById("animalForm").reset();
-      displayAnimals();
-    }
-
-    function deleteAnimal(index) {
-      animals.splice(index, 1);
-      saveToStorage();
-      displayAnimals();
-    }
-
-    function displayAnimals() {
-      const list = document.getElementById("animalList");
-      list.innerHTML = "";
-
-      animals.forEach((animal, index) => {
-        const li = document.createElement("li");
-        li.innerHTML = `
-          ${index + 1}. ${animal.name} | Gender: ${animal.gender} | Caretaker: ${animal.caretaker} | Vet: ${animal.vetCheckups} | Feeding: ${animal.feedingSchedule}
-          <button class="delete-btn" onclick="deleteAnimal(${index})">Delete</button>
-        `;
-        list.appendChild(li);
-      });
-    }
-
-    // Display on page load
-    window.onload = displayAnimals;
-  </script>
+  // Display on page load
+  window.onload = displayAnimals;
+</script>
 </body>
 </html>
