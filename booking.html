@@ -77,6 +77,23 @@
     .delete-btn:hover {
       background-color: darkred;
     }
+
+    .bottom-right-link {
+      text-align: right;
+      max-width: 450px;
+      margin: 0 auto 20px auto;
+    }
+
+    .bottom-right-link a {
+      text-decoration: none;
+      color: #333;
+      font-weight: bold;
+      font-size: 14px;
+    }
+
+    .bottom-right-link a:hover {
+      text-decoration: underline;
+    }
   </style>
 </head>
 <body>
@@ -115,9 +132,9 @@
     <div id="summaryList"></div>
   </div>
 
-  <!-- ✅ Previous Button Below Summary -->
-  <div style="text-align: center; margin-top: 20px;">
-    <button onclick="window.location.href='animal-records.html'" style="padding: 2px 6px; font-size: 10px; border-radius: 6px; background-color: #4CAF50; color: white; border: none;">⬅️ Previous</button>
+  <!-- ✅ Previous Link styled like nav button -->
+  <div class="bottom-right-link">
+    <a href="animal-records.html">⬅️ Previous</a>
   </div>
 
   <!-- Booking Logic -->
