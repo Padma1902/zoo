@@ -29,6 +29,8 @@
       border-radius: 10px;
       max-width: 450px;
       margin-bottom: 20px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     .form-container input,
@@ -85,7 +87,7 @@
     <a href="booking.html">Ticket Booking</a>
   </nav>
 
-  <h2>Book a Ticket</h2>
+  <h2 style="text-align: center;">Book a Ticket</h2>
 
   <!-- Booking Form Container -->
   <div class="form-container">
@@ -111,6 +113,11 @@
   <div id="ticketSummary" class="form-container">
     <h3>🎟️ All Ticket Summaries</h3>
     <div id="summaryList"></div>
+  </div>
+
+  <!-- ✅ Previous Button Below Summary -->
+  <div style="text-align: center; margin-top: 20px;">
+    <button onclick="window.location.href='animal-records.html'" style="padding: 10px 20px; border-radius: 6px; background-color: #4CAF50; color: white; border: none;">⬅️ Previous</button>
   </div>
 
   <!-- Booking Logic -->
