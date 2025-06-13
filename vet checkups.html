@@ -8,6 +8,9 @@
       font-family: Arial, sans-serif;
       background-color: lightblue;
       padding: 20px;
+      margin: 0;
+      position: relative;
+      min-height: 100vh;
     }
 
     .form-container {
@@ -56,6 +59,26 @@
     .done-button button:hover {
       background-color: darkgreen;
     }
+
+    .previous-button {
+      position: fixed;
+      bottom: 15px;
+      right: 15px;
+    }
+
+    .previous-button a {
+      background-color: #555;
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      font-size: 12px;
+      border-radius: 5px;
+      font-weight: bold;
+    }
+
+    .previous-button a:hover {
+      background-color: #333;
+    }
   </style>
 </head>
 <body>
@@ -76,6 +99,11 @@
         <button type="submit">Done</button>
       </div>
     </form>
+  </div>
+
+  <!-- 🔙 Previous Button -->
+  <div class="previous-button">
+    <a href="animal-records.html">Previous</a>
   </div>
 
 </body>
