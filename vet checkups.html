@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Vet Checkup</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: lightblue;
+      padding: 20px;
+    }
+
+    .form-container {
+      background-color: white;
+      padding: 25px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: 0 auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+      box-sizing: border-box;
+    }
+
+    .done-button {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .done-button button {
+      padding: 4px 8px;
+      font-size: 12px;
+      background-color: green;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .done-button button:hover {
+      background-color: darkgreen;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="form-container">
+    <h2>Vet Checkup Details</h2>
+    <form id="vetForm">
+      <label for="docName">Doctor's Name:</label>
+      <input type="text" id="docName" name="docName" placeholder="Enter name" required />
+
+      <label for="email">Email ID:</label>
+      <input type="email" id="email" name="email" placeholder="Enter email" required />
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" name="phone" placeholder="Enter phone" required />
+
+      <div class="done-button">
+        <button type="submit">Done</button>
+      </div>
+    </form>
+  </div>
+
+</body>
+</html>
