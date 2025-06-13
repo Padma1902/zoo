@@ -23,6 +23,13 @@
       text-decoration: none;
       font-weight: bold;
       color: #333;
+      padding: 8px 12px;
+      background-color: #e6e6fa;
+      border-radius: 6px;
+    }
+
+    nav a:hover {
+      background-color: #d8d8f0;
     }
 
     .form-container {
@@ -108,24 +115,26 @@
       background-color: darkred;
     }
 
-    /* Style for small next button */
+    /* 🔽 Updated Next Button Style at Bottom Right */
     .next-btn {
-      text-align: center;
-      margin-top: 25px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
     }
 
-    .next-btn button {
-      font-size: 12px;
-      padding: 6px 12px;
-      border-radius: 4px;
-      background-color: #4CAF50;
-      color: white;
-      border: none;
-      cursor: pointer;
+    .next-btn a {
+      text-decoration: none;
+      font-weight: bold;
+      color: #333;
+      padding: 8px 12px;
+      background-color: #e6e6fa;
+      border-radius: 6px;
+      font-size: 14px;
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
     }
 
-    .next-btn button:hover {
-      background-color: #3e8e41;
+    .next-btn a:hover {
+      background-color: #d8d8f0;
     }
   </style>
 </head>
@@ -168,9 +177,9 @@
   <h2>Saved Records</h2>
   <ul id="animalList"></ul>
 
-  <!-- ✅ Small Next Button at Bottom -->
+  <!-- ✅ Styled Next Button like nav link at bottom-right -->
   <div class="next-btn">
-    <button onclick="window.location.href='booking.html'">Next ➡️</button>
+    <a href="booking.html">Next ➡️</a>
   </div>
 
   <script>
